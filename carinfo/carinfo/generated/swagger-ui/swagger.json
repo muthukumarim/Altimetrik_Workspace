@@ -1,0 +1,88 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.1",
+    "title" : "Car Manufacture Retrieve Service"
+  },
+  "basePath" : "/service/v1",
+  "paths" : {
+    "/service/v1/getInfo" : {
+      "get" : {
+        "summary" : "get the Car Manufacture Details info",
+        "description" : "",
+        "operationId" : "getManufactureInfo",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "carname",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CarDetailsResponse"
+            }
+          },
+          "404" : {
+            "description" : "service not availabe"
+          },
+          "500" : {
+            "description" : "unexpected runtime error"
+          }
+        }
+      }
+    },
+    "/service/v1/healthcheck" : {
+      "get" : {
+        "operationId" : "healthCheck",
+        "parameters" : [ {
+          "name" : "message",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "CarDetails" : {
+      "type" : "object",
+      "properties" : {
+        "Mfr_ID" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "Mfr_Name" : {
+          "type" : "string"
+        },
+        "City" : {
+          "type" : "string"
+        },
+        "StateProvince" : {
+          "type" : "string"
+        },
+        "Country" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CarDetailsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "carDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CarDetails"
+          }
+        }
+      }
+    }
+  }
+}
